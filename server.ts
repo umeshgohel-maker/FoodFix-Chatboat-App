@@ -65,8 +65,10 @@ async function startServer() {
   // Middleware for parsing JSON with a larger limit to handle base64 images
   app.use(express.json({ limit: "15mb" }));
 
+  const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
+
   const ai = new GoogleGenAI({
-    apiKey: process.env.GEMINI_API_KEY,
+    apiKey: apiKey,
     httpOptions: {
       headers: {
         'User-Agent': 'aistudio-build',
